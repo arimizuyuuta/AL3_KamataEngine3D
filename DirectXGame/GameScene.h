@@ -1,6 +1,6 @@
 #pragma once
 #include "KamataEngine.h"
-
+#include "player.h"
 //ゲームシーン
 class GameScene
 {
@@ -28,5 +28,10 @@ public:
 
 	//デストラクタ
 	~GameScene();
+
+	//自キャラ
+	Player* player_ = nullptr;
+
+
 
 };
