@@ -14,7 +14,8 @@ void GameScene::Initialize() {
 	camera_.UpdateMatrix();
 
 	player_ = new Player();
-	player_->Initialize(modelPlayer_, 0, &camera_);
+	Vector3 playerPosition = mapChipField_->GetMapChipPositionByIndex(1, 18);
+	player_-> Initialize(modelPlayer_, &camera_, playerPosition);
 
 	debugCamera_ = new DebugCamera(1280, 720);
 
@@ -26,12 +27,8 @@ void GameScene::Initialize() {
 
 	GenerateBlocks(); // ← ブロック生成をここで呼び出す
 
-	// プレイヤーの初期位置を左下あたりにセット
-	player_->worldTransform_.translation_ = mapChipField_->GetMapChipPositionByIndex(1, 18);
-
-	// 行列更新
-	player_->worldTransform_.matWorld_ = MakeAffineMatrix(player_->worldTransform_.scale_, player_->worldTransform_.rotation_, player_->worldTransform_.translation_);
-	player_->worldTransform_.TransferMatrix();
+	
+	
 
 
 }
