@@ -1,6 +1,7 @@
 #pragma once
 #include "KamataEngine.h"
 #include "MapChipField.h"
+#include "CameraController.h"
 #include "Player.h"
 #include "Skydome.h"
 #include <vector>
@@ -25,6 +26,6 @@ private:
 	Player* player_ = nullptr;
 	Skydome* skydome_ = nullptr;
 	MapChipField* mapChipField_ = nullptr; // ← 追加
-
+	CameraController* cameraController_ = nullptr;
 	std::vector<std::vector<KamataEngine::WorldTransform*>> worldTransformBlocks_;
 };

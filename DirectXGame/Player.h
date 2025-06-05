@@ -6,6 +6,7 @@ public:
 	void Initialize(KamataEngine::Model* model, KamataEngine::Camera* camera, const KamataEngine::Vector3& position);
 	void Update();
 	void Draw();
+	const KamataEngine ::WorldTransform& GetWorldTransform() const { return worldTransform_; }
 
 private:
 	KamataEngine::WorldTransform worldTransform_;
@@ -33,4 +34,6 @@ private:
 	static inline const float kLimitFallSpeed = -1.0f;
 
 	static inline const float kTimeTurn = 0.3f;
+
+	
 };
