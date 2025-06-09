@@ -30,4 +30,11 @@ public:
 	Rect movableArea_ = {0, 100, 0, 100};
 
 	 void SetMovableArea(const Rect& area) { movableArea_ = area; }
+
+	 KamataEngine::Vector3 targetPosition_;               
+	 static inline const float kInterpolationRate = 0.1f; 
+
+	 static inline const float kVelocityBias = 30.0f;
+
+	 static inline const Rect targetMargin = {-9.0f, 9.0f, -5.0f, 5.0f};
 };
