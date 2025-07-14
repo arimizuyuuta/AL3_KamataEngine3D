@@ -1,6 +1,7 @@
 #include "GameScene.h"
 #include "MyMath.h"
 #include "CameraController.h"
+#include"Player.h"
 using namespace KamataEngine;
 
 void GameScene::Initialize() {
@@ -33,6 +34,8 @@ void GameScene::Initialize() {
 	cameraController_->Reset();
 	CameraController ::Rect cameraArea = {12.0f, 100 - 12.0f, 6.0f, 6.0f};
 	cameraController_->SetMovableArea(cameraArea);
+
+	player_->SetMapChipField(mapChipField_);
 	
 }
 

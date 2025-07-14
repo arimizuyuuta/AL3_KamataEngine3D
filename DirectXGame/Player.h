@@ -1,5 +1,6 @@
 #pragma once
 #include "KamataEngine.h"
+class MapChipField;
 
 class Player {
 public:
@@ -8,6 +9,7 @@ public:
 	void Draw();
 	const KamataEngine ::WorldTransform& GetWorldTransform() const { return worldTransform_; }
 	const KamataEngine::Vector3& GetVelocity() const { return velocity_; }
+	void SetMapChipField(MapChipField* mapChipField) { mapChipField_ = mapChipField; }
 
 private:
 	KamataEngine::WorldTransform worldTransform_;
@@ -15,6 +17,10 @@ private:
 	KamataEngine::Camera* camera_ = nullptr;
 
 	KamataEngine::Vector3 velocity_ = {};
+
+	MapChipField* mapChipField_ = nullptr;
+
+
 
 	enum class LRDirection {
 		kRight,
@@ -32,9 +38,14 @@ private:
 
 	static inline const float kJumpAcceleration = 0.5f;
 	static inline const float kGravityAcceleration = 0.05f;
-	static inline const float kLimitFallSpeed = -1.0f;
+	static inline const float kLimitFallSpeed = 1.0f;
 
 	static inline const float kTimeTurn = 0.3f;
 
+	static inline const float kWidth = 0.8f;
+	static inline const float kHeight = 0.8f;
+
 	
+	void InputMove();
 };
+
