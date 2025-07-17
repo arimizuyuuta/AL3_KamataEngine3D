@@ -45,7 +45,38 @@ private:
 	static inline const float kWidth = 0.8f;
 	static inline const float kHeight = 0.8f;
 
-	
+	struct CollisionMapInfo {
+		bool ceiling = false;
+		bool landing = false;
+		bool hitWall = false;
+		KamataEngine::Vector3 move;
+	};
+
 	void InputMove();
-};
+	
+	void CheckMapCollision(CollisionMapInfo& info);
+	void CheckMapCollisionUp(CollisionMapInfo& info);
+
+	void CheckMapMove(const CollisionMapInfo& info);
+
+	void CheckMapCeiling(const CollisionMapInfo& info);
+
+	void AnimateTurn();
+
+	// 角
+	enum Corner {
+		kRightBottom, // 右下
+		kLeftBottom,  //  左下
+		kRightTop,    //  右上
+		kLeftTop,     //  左上
+
+		kNumCorner // 要素数
+
+	};
+		
+	
+		
+
+		
+	};
 
