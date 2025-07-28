@@ -52,6 +52,7 @@ private:
 		bool ceiling = false;
 		bool landing = false;
 		bool hitWall = false;
+
 		KamataEngine::Vector3 move;
 	};
 
@@ -64,8 +65,14 @@ private:
 
 	void CheckMapCeiling(const CollisionMapInfo& info);
 
+	void CheckMapCollisionDown(CollisionMapInfo& info);
+
 	void AnimateTurn();
 
+
+	void CheckMapWall(const CollisionMapInfo& info);
+
+	void CheckMapMapLanding(const CollisionMapInfo& info);
 	// 角
 	enum Corner {
 		kRightBottom, // 右下
