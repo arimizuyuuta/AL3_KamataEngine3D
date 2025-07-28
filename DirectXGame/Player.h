@@ -45,6 +45,9 @@ private:
 	static inline const float kWidth = 0.8f;
 	static inline const float kHeight = 0.8f;
 
+	// 隙間
+	static inline const float kBlank = 0.1f;
+
 	struct CollisionMapInfo {
 		bool ceiling = false;
 		bool landing = false;
@@ -75,7 +78,7 @@ private:
 	};
 		
 	
-		
+		KamataEngine::Vector3 CornerPosition(const KamataEngine::Vector3& center, Corner corner);
 
 		
 	};
