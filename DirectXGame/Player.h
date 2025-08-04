@@ -74,9 +74,9 @@ private:
 
 	void CheckMapLanding(const CollisionMapInfo& info);
 
-	void CheckMapCollisionRight(const CollisionMapInfo& info);
+	void CheckMapCollisionRight( CollisionMapInfo& info);
 
-	void CheckMapCollisionLeft(const CollisionMapInfo& info);
+	void CheckMapCollisionLeft( CollisionMapInfo& info);
 	// 角
 	enum Corner {
 		kRightBottom, // 右下

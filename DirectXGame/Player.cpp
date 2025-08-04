@@ -188,9 +188,9 @@ void Player::InputMove() {
 void Player::CheckMapCollision(CollisionMapInfo& info) {
 
 	CheckMapCollisionUp(info);
-	// CheckMapCollisionDown(info);
-	// CheckMapCollisionRight (info);
-	// CheckMapCollisionLeft (info);
+	CheckMapCollisionDown(info);
+	CheckMapCollisionRight (info);
+	CheckMapCollisionLeft (info);
 }
 
     void Player::CheckMapCollisionUp(CollisionMapInfo& info) {
@@ -449,18 +449,6 @@ void Player::CheckMapLanding(const CollisionMapInfo& info) {
 		}
 	}
 }
-
-Vector3 Player::CornerPosition(const KamataEngine::Vector3& center, Corner corner) {
-	Vector3 offsetTable[kNumCorner] = {
-	    {+kWidth / 2.0f, -kHeight / 2.0f, 0}, // kRightBottom
-	    {-kWidth / 2.0f, -kHeight / 2.0f, 0}, // kLeftBottom
-	    {+kWidth / 2.0f, +kHeight / 2.0f, 0}, // kRightTop
-	    {-kWidth / 2.0f, +kHeight / 2.0f, 0}  // kLeftTop
-	};
-
-	return center + offsetTable[static_cast<uint32_t>(corner)];
-}
-
 // ⑦旋回制御
 void Player::AnimateTurn() {
 	if (turnTimer_ > 0.0f) {
@@ -473,8 +461,6 @@ void Player::AnimateTurn() {
 		worldTransform_.rotation_.y = EaseInOut(destinationRotationY, turnFirstRotationY_, turnTimer_ / kTimeTurn);
 	}
 }
-
-// 指定した角の座標計算
 Vector3 Player::CornerPosition(const KamataEngine::Vector3& center, Corner corner) {
 	Vector3 offsetTable[kNumCorner] = {
 	    {+kWidth / 2.0f, -kHeight / 2.0f, 0}, // kRightBottom
@@ -485,3 +471,6 @@ Vector3 Player::CornerPosition(const KamataEngine::Vector3& center, Corner corne
 
 	return center + offsetTable[static_cast<uint32_t>(corner)];
 }
+
+
+
