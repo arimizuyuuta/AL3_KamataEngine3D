@@ -72,7 +72,11 @@ private:
 
 	void CheckMapWall(const CollisionMapInfo& info);
 
-	void CheckMapMapLanding(const CollisionMapInfo& info);
+	void CheckMapLanding(const CollisionMapInfo& info);
+
+	void CheckMapCollisionRight(const CollisionMapInfo& info);
+
+	void CheckMapCollisionLeft(const CollisionMapInfo& info);
 	// 角
 	enum Corner {
 		kRightBottom, // 右下
@@ -88,5 +92,14 @@ private:
 		KamataEngine::Vector3 CornerPosition(const KamataEngine::Vector3& center, Corner corner);
 
 		
+
+		  // 着地時の速度減衰率
+	    static inline const float kAttenuationLanding = 0.1f;
+	    // 落下用
+	    static inline const float kGroundSearchHeight = 0.1f;
+	    // 壁での速度減衰率
+	    static inline const float kAttenuationWall = 0.1f;
+
+
 	};
 
