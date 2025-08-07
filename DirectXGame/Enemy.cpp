@@ -29,6 +29,8 @@ void Enemy::Initialize(Model* model, Camera* camera, const Vector3& position)
 		 velocity_ = {-kWalkSpeed_,0,0};
 
 		 walkTimer_ = 0.0f;
+
+
 }
 
 void Enemy::Update() {
@@ -48,4 +50,34 @@ void Enemy::Update() {
 void Enemy::Draw() {
 	// 3Dモデルを描画
 	model_->Draw(worldTransform_, *camera_);
+
+}
+Vector3 Enemy::GetWorldPosition() {
+	Vector3 worldPos;
+
+	worldPos.x = worldTransform_.matWorld_.m[3][0];
+	worldPos.y = worldTransform_.matWorld_.m[3][1];
+	worldPos.z = worldTransform_.matWorld_.m[3][2];
+
+	return worldPos;
+}
+
+	void Enemy::OnCollision(const Player * player) { 
+		(void)player;
+	}
+
+
+
+
+
+AABB Enemy::GetAABB() {
+
+	Vector3 worldPos = GetWorldPosition();
+
+	AABB aabb;
+
+	aabb.min = {worldPos.x - 1.0f / 2.0f, worldPos.y - 1.0f / 2.0f, worldPos.z - 1.0f / 2.0f};
+	aabb.max = {worldPos.x + 1.0f / 2.0f, worldPos.y + 1.0f / 2.0f, worldPos.z + 1.0f / 2.0f};
+
+	return aabb;
 }

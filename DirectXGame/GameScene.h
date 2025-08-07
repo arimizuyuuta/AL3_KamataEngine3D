@@ -12,6 +12,7 @@ public:
 	void Initialize();
 	void Update();
 	void Draw();
+	void CheckAllCollisions();
 	~GameScene();
 
 private:
@@ -31,5 +32,5 @@ private:
 	CameraController* cameraController_ = nullptr;
 	std::vector<std::vector<KamataEngine::WorldTransform*>> worldTransformBlocks_;
 
-	Enemy* enemy_ = nullptr;
+	std::list<Enemy*> enemies_;
 };
