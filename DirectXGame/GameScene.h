@@ -4,6 +4,7 @@
 #include "CameraController.h"
 #include "Player.h"
 #include "Skydome.h"
+#include "Enemy.h"
 #include <vector>
 
 class GameScene {
@@ -28,4 +29,5 @@ private:
 	MapChipField* mapChipField_ = nullptr; // ← 追加
 	CameraController* cameraController_ = nullptr;
 	std::vector<std::vector<KamataEngine::WorldTransform*>> worldTransformBlocks_;
+
 };
