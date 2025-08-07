@@ -8,6 +8,7 @@ void GameScene::Initialize() {
 
 	modelBlock_ = Model::CreateFromOBJ("block");
 	modelPlayer_ = Model::CreateFromOBJ("player");
+	modelEnemy_ = Model::CreateFromOBJ("enemy");
 	modelSkydome_ = Model::CreateFromOBJ("skydome", true);
 
 	camera_.Initialize();
@@ -37,6 +38,10 @@ void GameScene::Initialize() {
 
 	player_->SetMapChipField(mapChipField_);
 	
+
+	enemy_ = new Enemy();
+	Vector3 penemyPosition = mapChipField_->GetMapChipPositionByIndex(20, 18);
+	enemy_->Initialize(modelEnemy_, &camera_, penemyPosition);
 }
 
 void GameScene::GenerateBlocks() {
@@ -67,6 +72,7 @@ void GameScene::GenerateBlocks() {
 void GameScene::Update() {
 	player_->Update();
 	skydome_->Update();
+	enemy_->Update();
 	cameraController_->Update();
 	for (const auto& line : worldTransformBlocks_) {
 		for (WorldTransform* wt : line) {
@@ -107,7 +113,7 @@ void GameScene::Draw() {
 		}
 	}
 	player_->Draw();
-
+	enemy_->Draw();
 	Model::PostDraw();
 }
 

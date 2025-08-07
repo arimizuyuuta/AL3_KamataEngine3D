@@ -1,12 +1,11 @@
 #define NOMINMAX
 #include "Player.h"
-#include "MyMath.h"
 #include "MapChipField.h"
-#include <numbers>
+#include "MyMath.h"
 #include <algorithm>
+#include <numbers>
 using namespace KamataEngine;
 using namespace MathUtility;
-
 
 void Player::Initialize(Model* model, Camera* camera, const Vector3& position) 
 {
