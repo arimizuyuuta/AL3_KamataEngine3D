@@ -131,6 +131,8 @@ void GameScene::Update() {
 
 		finished = true;
 	}
+
+	ChangePhase();
 }
 
 void GameScene::Draw() {

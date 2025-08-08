@@ -114,8 +114,13 @@ void Player::Update()
 // 描画
 void Player:: Draw()
 {
+	if (isDead_ == true) {
+		return;
+	}
                 // 3Dモデルを描画
                 model_->Draw(worldTransform_, *camera_);
+
+				
 }
 
 void Player::InputMove() {
@@ -331,6 +336,7 @@ void Player::CheckMapMove(const CollisionMapInfo& info) {
 		    hit = true;
 	    }
 
+
 	    // ブロックにヒット？
 	    if (hit) {
 		    // めり込みを排除する方向に移動量を設定する
@@ -456,6 +462,8 @@ void Player::CheckMapLanding(const CollisionMapInfo& info) {
 			velocity_.y = 0.0f;
 		}
 	}
+
+
 }
 // ⑦旋回制御
 void Player::AnimateTurn() {
@@ -495,6 +503,7 @@ void Player::OnCollision(const Enemy* enemy) {
 	(void)enemy;
 	velocity_ += Vector3(0,1,0);
 	isDead_ = true;
+
 }
 
 
