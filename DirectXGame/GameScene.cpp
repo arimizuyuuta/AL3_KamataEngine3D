@@ -9,6 +9,7 @@ void GameScene::Initialize() {
 	modelBlock_ = Model::CreateFromOBJ("block");
 	modelPlayer_ = Model::CreateFromOBJ("player");
 	modelEnemy_ = Model::CreateFromOBJ("enemy");
+	modelDeathParticle_ = Model::CreateFromOBJ("deathParticle");
 	modelSkydome_ = Model::CreateFromOBJ("skydome", true);
 
 	camera_.Initialize();
@@ -47,6 +48,10 @@ void GameScene::Initialize() {
 
 		enemies_.push_back(newEnemy);
 	}
+
+	//仮
+	deathParticles_ = new DeathParticles();
+	deathParticles_->Initialize(modelDeathParticle_, &camera_, playerPosition);
 }
 
 void GameScene::GenerateBlocks() {
@@ -108,6 +113,11 @@ void GameScene::Update() {
 	}
 	//全ての当たり判定を行う
 	CheckAllCollisions();
+
+	if (deathParticles_) {
+		deathParticles_->Update();
+	}
+
 }
 
 void GameScene::Draw() {
@@ -130,7 +140,12 @@ void GameScene::Draw() {
 	for (Enemy* enemy : enemies_) {
 		enemy->Draw();
 	}
+	if (deathParticles_) {
+		deathParticles_->Draw();
+	}
 	Model::PostDraw();
+
+	
 }
 
 void GameScene::CheckAllCollisions() {

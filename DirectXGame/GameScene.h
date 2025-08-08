@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Skydome.h"
 #include "Enemy.h"
+#include "DeathParticles.h"
 #include <vector>
 
 class GameScene {
@@ -22,7 +23,8 @@ private:
 	KamataEngine::Model* modelSkydome_ = nullptr;
 	KamataEngine::Model* modelPlayer_ = nullptr;
 	KamataEngine::Model* modelEnemy_ = nullptr;
-
+	KamataEngine::Model* modelDeathParticle_ = nullptr;
+	
 	KamataEngine::Camera camera_;
 	bool isDebugCameraActive_ = false;
 	KamataEngine::DebugCamera* debugCamera_ = nullptr;
@@ -33,4 +35,6 @@ private:
 	std::vector<std::vector<KamataEngine::WorldTransform*>> worldTransformBlocks_;
 
 	std::list<Enemy*> enemies_;
+
+	DeathParticles* deathParticles_ = nullptr;
 };
