@@ -15,7 +15,7 @@ void DeathParticles::Initialize(KamataEngine::Model* model, KamataEngine::Camera
 	model_ = model;
 	
 	// 引数の内容をメンバ変数に記録
-	camera = camera;
+	camera_ = camera;
 
 	
 
@@ -37,7 +37,26 @@ void DeathParticles::Update() {
 
 	}
 
+	for (uint32_t i = 0; i < kNumParticles; ++i) {
+		//基本速度ベクトル
+		Vector3 velocity = {kSpeed, 0, 0};
+		//回転角計算
+		float angle = kAngleUnit * i;
+		//z回転行列
+		Matrix4x4 matrixRotation = MakeRotationZMatrix(angle);
 
+		velocity = Transform(velocity, matrixRotation);
+
+		worldTransforms_[i].translation_ += velocity;
+
+		counter_ += 1.0f / 60.f;
+
+		if (counter_ >= kDuration) {
+			counter_ = kDuration;
+			//終了
+			isFinished_ = true;
+		}
+	}
 }
 
 

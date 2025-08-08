@@ -17,7 +17,7 @@ void GameScene::Initialize() {
 	camera_.UpdateMatrix();
 
 	player_ = new Player();
-	Vector3 playerPosition = mapChipField_->GetMapChipPositionByIndex(1, 18);
+	Vector3 playerPosition = mapChipField_->GetMapChipPositionByIndex(5, 18);
 	player_-> Initialize(modelPlayer_, &camera_, playerPosition);
 
 	debugCamera_ = new DebugCamera(1280, 720);
@@ -42,7 +42,7 @@ void GameScene::Initialize() {
 
 	for (int32_t i = 0; i < 2; ++i) {
 		Enemy* newEnemy = new Enemy();
-		Vector3 enemyPosition = mapChipField_->GetMapChipPositionByIndex(6 + i, 18);
+		Vector3 enemyPosition = mapChipField_->GetMapChipPositionByIndex(50 + i, 18);
 
 		newEnemy->Initialize(modelEnemy_, &camera_, enemyPosition);
 
