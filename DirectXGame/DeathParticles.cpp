@@ -46,7 +46,7 @@ void DeathParticles::Update() {
 		//回転角計算
 		float angle = kAngleUnit * i;
 		//z回転行列
-		Matrix4x4 matrixRotation = MakeRotationZMatrix(angle);
+		Matrix4x4 matrixRotation = MakeRotateZMatrix(angle);
 
 		velocity = Transform(velocity, matrixRotation);
 
@@ -64,7 +64,7 @@ void DeathParticles::Update() {
 		return;
 	}
 
-	color_.w = std::clamp(, 0.0f, 1.0f);
+	color_.w = std::clamp(counter_, 0.0f, 1.0f);
 
 	objectColor_.SetColor(color_);
 }

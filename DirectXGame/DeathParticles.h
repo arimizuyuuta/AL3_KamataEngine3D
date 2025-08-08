@@ -23,7 +23,7 @@ class DeathParticles {
 	//存在時間
 	static inline const float kDuration = 1.0f;
 	//速さ
-	static inline const float kSpeed = 0.5f;
+	static inline const float kSpeed = 0.05f;
 	//角度
 	static inline const float kAngleUnit = 2.0f * std::numbers::pi_v<float> / kNumParticles;
 	//終了フラグ
@@ -31,7 +31,7 @@ class DeathParticles {
 	//経過時間カウント
 	float counter_ = 0.0f;
 
-	ObjectColor objectColor_;
+	KamataEngine::ObjectColor objectColor_;
 
-	Vector4 color_;
+	KamataEngine::Vector4 color_;
 };
