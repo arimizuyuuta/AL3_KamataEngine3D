@@ -14,7 +14,14 @@ public:
 	void Update();
 	void Draw();
 	void CheckAllCollisions();
+	void ChangePhase();
 	~GameScene();
+
+	// 終了フラグのgetter
+	bool IsFinished() const { return finished; }
+
+	// 終了フラグ(変数名に注意)
+	bool finished = false;
 
 private:
 	void GenerateBlocks(); // ← 追加
@@ -37,4 +44,11 @@ private:
 	std::list<Enemy*> enemies_;
 
 	DeathParticles* deathParticles_ = nullptr;
+
+	enum class Phase {
+		kPlay,
+		kDeath,
+	};
+
+	Phase phase_;
 };

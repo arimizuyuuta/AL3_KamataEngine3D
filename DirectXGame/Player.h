@@ -16,6 +16,8 @@ public:
 
 	AABB GetAABB();
 	void OnCollision(const Enemy* enemy);
+	KamataEngine::Vector3 GetWorldPosition();
+	bool IsDead() const { return isDead_; }
 
 private:
 	KamataEngine::WorldTransform worldTransform_;
@@ -107,7 +109,10 @@ private:
 	    static inline const float kAttenuationWall = 0.1f;
 
 
-		KamataEngine::Vector3 GetWorldPosition();
-	   
+		
+
+		bool isDead_ = false;
+
+		
 };
 

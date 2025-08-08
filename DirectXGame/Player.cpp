@@ -493,8 +493,8 @@ Vector3 worldPos;
 void Player::OnCollision(const Enemy* enemy) {
 
 	(void)enemy;
-
 	velocity_ += Vector3(0,1,0);
+	isDead_ = true;
 }
 
 

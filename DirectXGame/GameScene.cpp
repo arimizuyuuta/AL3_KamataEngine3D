@@ -11,7 +11,7 @@ void GameScene::Initialize() {
 	modelEnemy_ = Model::CreateFromOBJ("enemy");
 	modelDeathParticle_ = Model::CreateFromOBJ("deathParticle");
 	modelSkydome_ = Model::CreateFromOBJ("skydome", true);
-
+	
 	camera_.Initialize();
 	camera_.farZ = 1000.0f;
 	camera_.UpdateMatrix();
@@ -49,9 +49,9 @@ void GameScene::Initialize() {
 		enemies_.push_back(newEnemy);
 	}
 
-	//仮
-	deathParticles_ = new DeathParticles();
-	deathParticles_->Initialize(modelDeathParticle_, &camera_, playerPosition);
+	
+	phase_ = Phase::kPlay;
+
 }
 
 void GameScene::GenerateBlocks() {
@@ -92,7 +92,7 @@ void GameScene::Update() {
 			wt->TransferMatrix();
 		}
 	}
-
+	
 	if (Input::GetInstance()->TriggerKey(DIK_O)) {
 		isDebugCameraActive_ = !isDebugCameraActive_;
 	}
@@ -111,13 +111,26 @@ void GameScene::Update() {
 	for (Enemy* enemy : enemies_) {
 		enemy->Update();
 	}
-	//全ての当たり判定を行う
-	CheckAllCollisions();
+	
 
-	if (deathParticles_) {
-		deathParticles_->Update();
+	
+
+	switch (phase_) {
+	case Phase::kPlay:
+		// 全ての当たり判定を行う
+		CheckAllCollisions();
+		break;
+	case Phase::kDeath:
+		if (deathParticles_) {
+			deathParticles_->Update();
+		}
+		break;
 	}
+	// デスパーティクルが終了したらシーンを終了する
+	if (deathParticles_ && deathParticles_ -> IsFinished()) {
 
+		finished = true;
+	}
 }
 
 void GameScene::Draw() {
@@ -165,6 +178,27 @@ void GameScene::CheckAllCollisions() {
 			enemy->OnCollision(player_);
 		}
 	}
+}
+void GameScene::ChangePhase() { 
+	switch (phase_) {
+	case Phase::kPlay:
+		if (player_->IsDead()) {
+			phase_ = Phase::kDeath;
+
+			const Vector3& playerPosition = player_->GetWorldPosition();
+	
+			deathParticles_ = new DeathParticles();
+			deathParticles_->Initialize(modelDeathParticle_, &camera_, playerPosition);
+
+		}
+
+		break;
+	case Phase::kDeath:
+
+
+		break;
+	}
+
 }
 #pragma endregion
 
