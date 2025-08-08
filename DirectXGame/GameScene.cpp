@@ -11,7 +11,7 @@ void GameScene::Initialize() {
 	modelEnemy_ = Model::CreateFromOBJ("enemy");
 	modelDeathParticle_ = Model::CreateFromOBJ("deathParticle");
 	modelSkydome_ = Model::CreateFromOBJ("skydome", true);
-	
+	modelTitleFont_ = Model::CreateFromOBJ("titleFont");
 	camera_.Initialize();
 	camera_.farZ = 1000.0f;
 	camera_.UpdateMatrix();
@@ -191,7 +191,6 @@ void GameScene::ChangePhase() {
 			deathParticles_->Initialize(modelDeathParticle_, &camera_, playerPosition);
 
 		}
-
 		break;
 	case Phase::kDeath:
 

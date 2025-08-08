@@ -25,13 +25,13 @@ public:
 
 private:
 	void GenerateBlocks(); // ← 追加
-
+	
 	KamataEngine::Model* modelBlock_ = nullptr;
 	KamataEngine::Model* modelSkydome_ = nullptr;
 	KamataEngine::Model* modelPlayer_ = nullptr;
 	KamataEngine::Model* modelEnemy_ = nullptr;
 	KamataEngine::Model* modelDeathParticle_ = nullptr;
-	
+	KamataEngine::Model* modelTitleFont_ = nullptr;
 	KamataEngine::Camera camera_;
 	bool isDebugCameraActive_ = false;
 	KamataEngine::DebugCamera* debugCamera_ = nullptr;

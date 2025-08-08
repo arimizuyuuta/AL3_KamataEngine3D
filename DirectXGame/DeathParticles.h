@@ -11,7 +11,7 @@ class DeathParticles {
 	void Update();
 	void Draw();
 
-
+	bool IsFinished() const { return isFinished_; }
 	private:
 	
 	KamataEngine::Model* model_ = nullptr;
