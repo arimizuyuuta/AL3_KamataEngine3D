@@ -24,6 +24,9 @@ void DeathParticles::Initialize(KamataEngine::Model* model, KamataEngine::Camera
 		worldTransform.Initialize();
 		worldTransform.translation_ = position;
 	}
+
+	objectColor_.Initialize();
+	color_ = {1, 1, 1, 1};
 }
 
 void DeathParticles::Update() {
@@ -57,6 +60,13 @@ void DeathParticles::Update() {
 			isFinished_ = true;
 		}
 	}
+	if (isFinished_) {
+		return;
+	}
+
+	color_.w = std::clamp(, 0.0f, 1.0f);
+
+	objectColor_.SetColor(color_);
 }
 
 
@@ -64,7 +74,9 @@ void DeathParticles::Draw() {
 	// 3Dモデルを描画
 	
 	for (WorldTransform& worldTransform : worldTransforms_) {
-		model_->Draw(worldTransform, *camera_);
+		model_->Draw(worldTransform, *camera_,&objectColor_);
 	}
-
+	if (isFinished_) {
+		return;
+	}
 }

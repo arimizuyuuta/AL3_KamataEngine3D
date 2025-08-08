@@ -30,4 +30,8 @@ class DeathParticles {
 	bool isFinished_ = false;
 	//経過時間カウント
 	float counter_ = 0.0f;
+
+	ObjectColor objectColor_;
+
+	Vector4 color_;
 };
