@@ -52,7 +52,7 @@ void DeathParticles::Update() {
 
 		worldTransforms_[i].translation_ += velocity;
 
-		counter_ += 1.0f / 60.f;
+		
 
 		if (counter_ >= kDuration) {
 			counter_ = kDuration;
@@ -62,9 +62,10 @@ void DeathParticles::Update() {
 	}
 	if (isFinished_) {
 		return;
+		
 	}
-
-	color_.w = std::clamp(counter_, 0.0f, 1.0f);
+	counter_ += 1.0f / 60.f;
+	color_.w = std::clamp(1.0f - counter_ / kDuration, 0.0f, 1.0f);
 
 	objectColor_.SetColor(color_);
 }
