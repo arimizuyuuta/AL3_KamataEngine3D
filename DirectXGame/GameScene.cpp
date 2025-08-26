@@ -16,6 +16,13 @@ void GameScene::Initialize() {
 	camera_.farZ = 1000.0f;
 	camera_.UpdateMatrix();
 
+	// フェードインから開始
+	phase_ = Phase::FadeIn;
+	// フェード
+	fade_ = new Fade();
+	fade_->Initialize();
+	fade_->Start(Fade::Status:: FadeIn, 1.0f);
+
 	player_ = new Player();
 	Vector3 playerPosition = mapChipField_->GetMapChipPositionByIndex(5, 18);
 	player_-> Initialize(modelPlayer_, &camera_, playerPosition);
@@ -78,12 +85,40 @@ void GameScene::GenerateBlocks() {
 
 	
 }
-
+//更新
 void GameScene::Update() {
-	player_->Update();
-	skydome_->Update();
 	
+
+	// フェーズ変更
+	ChangePhase();
+
+	// フェーズによる処理
+	switch (phase_) {
+	case Phase::kPlay:
+		// 全ての当たり判定を行う
+		CheckAllCollisions();
+		break;
+	case Phase::kDeath:
+		// デスパーティクルの更新
+		deathParticles_->Update();
+		break;
+	case Phase::kFadeIn:
+		// フェード
+		fade_->Update();
+		break;
+	case Phase::kFadeOut:
+		// フェード
+		fade_->Update();
+		break;
+	}
+	// 共通の処理
+	// 自キャラの更新
+	player_->Update();
+	// スカイドームの更新
+	skydome_->Update();
+	// カメラコントローラ
 	cameraController_->Update();
+
 	for (const auto& line : worldTransformBlocks_) {
 		for (WorldTransform* wt : line) {
 			if (!wt)
@@ -184,8 +219,38 @@ void GameScene::CheckAllCollisions() {
 void GameScene::ChangePhase() { 
 	switch (phase_) {
 	case Phase::kPlay:
+		// ゲームプレイフェーズの処理
 		if (player_->IsDead()) {
+			// 死亡演出フェーズに切り替え
 			phase_ = Phase::kDeath;
+			// 自手ャラの座標を取得
+			const Vector3& deathParticlesPosition = player_->GetWorldPosition();
+			deathParticles_ = new DeathParticles;
+			deathParticles_->Initialize(modelDeathParticles_, &camera_, deathParticlesPosition);
+		}
+		break;
+	case Phase::kDeath:
+		if (deathParticles_->IsFinished()) {
+			// フェードアウト開始
+			phase_ = Phase::kFadeOut;
+			fade_->Start(Fade::Status::FadeOut, 1.0f);
+			break;
+		case Phase::kFadeIn:
+			if (fade_->IsFinished()) {
+				// ゲームプレイへ
+				phase_ = Phase::kPlay;
+			}
+			break;
+		case Phase::kFadeOut:
+			// シーン終了
+			if (fade_->IsFinished()) {
+				finished = true;
+			}
+			break;
+		}
+	}
+
+
 
 			const Vector3& playerPosition = player_->GetWorldPosition();
 	

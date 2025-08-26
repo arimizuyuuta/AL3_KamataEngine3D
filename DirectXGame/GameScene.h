@@ -6,6 +6,7 @@
 #include "Skydome.h"
 #include "Enemy.h"
 #include "DeathParticles.h"
+#include "Fade.h"
 #include <vector>
 
 class GameScene {
@@ -51,4 +52,14 @@ private:
 	};
 
 	Phase phase_;
-};
+
+	// シーンのフェーズ
+	enum class Phase {
+		kFadeIn,  // フェードイン
+		kPlay,    // ゲームプレイ
+		kDeath,   // デス演出
+		kFadeOut, // フェードアウト
+	};
+	// フェード
+	Fade* fade_ = nullptr;
+	};
