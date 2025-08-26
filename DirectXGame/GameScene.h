@@ -46,12 +46,9 @@ private:
 
 	DeathParticles* deathParticles_ = nullptr;
 
-	enum class Phase {
-		kPlay,
-		kDeath,
-	};
+	
 
-	Phase phase_;
+	
 
 	// シーンのフェーズ
 	enum class Phase {
@@ -60,6 +57,7 @@ private:
 		kDeath,   // デス演出
 		kFadeOut, // フェードアウト
 	};
+	Phase phase_;
 	// フェード
 	Fade* fade_ = nullptr;
 	};

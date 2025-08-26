@@ -17,7 +17,7 @@ void GameScene::Initialize() {
 	camera_.UpdateMatrix();
 
 	// フェードインから開始
-	phase_ = Phase::FadeIn;
+	phase_ = Phase::kFadeIn;
 	// フェード
 	fade_ = new Fade();
 	fade_->Initialize();
@@ -57,7 +57,7 @@ void GameScene::Initialize() {
 	}
 
 	
-	phase_ = Phase::kPlay;
+	
 
 }
 
@@ -161,11 +161,7 @@ void GameScene::Update() {
 		}
 		break;
 	}
-	// デスパーティクルが終了したらシーンを終了する
-	if (deathParticles_ && deathParticles_ -> IsFinished()) {
-
-		finished = true;
-	}
+	
 
 	ChangePhase();
 }
@@ -195,7 +191,7 @@ void GameScene::Draw() {
 	}
 	Model::PostDraw();
 
-	
+	fade_->Draw();
 }
 
 void GameScene::CheckAllCollisions() {
@@ -226,7 +222,7 @@ void GameScene::ChangePhase() {
 			// 自手ャラの座標を取得
 			const Vector3& deathParticlesPosition = player_->GetWorldPosition();
 			deathParticles_ = new DeathParticles;
-			deathParticles_->Initialize(modelDeathParticles_, &camera_, deathParticlesPosition);
+			deathParticles_->Initialize(modelDeathParticle_, &camera_, deathParticlesPosition);
 		}
 		break;
 	case Phase::kDeath:
@@ -234,6 +230,7 @@ void GameScene::ChangePhase() {
 			// フェードアウト開始
 			phase_ = Phase::kFadeOut;
 			fade_->Start(Fade::Status::FadeOut, 1.0f);
+		}
 			break;
 		case Phase::kFadeIn:
 			if (fade_->IsFinished()) {
@@ -248,23 +245,7 @@ void GameScene::ChangePhase() {
 			}
 			break;
 		}
-	}
-
-
-
-			const Vector3& playerPosition = player_->GetWorldPosition();
 	
-			deathParticles_ = new DeathParticles();
-			deathParticles_->Initialize(modelDeathParticle_, &camera_, playerPosition);
-
-		}
-		break;
-	case Phase::kDeath:
-
-
-		break;
-	}
-
 }
 #pragma endregion
 

@@ -80,10 +80,7 @@ void TitleScene::Update() {
 	// 行列を定数バッファに転送
 	worldTransformPlayer_.TransferMatrix();
 
-	// タイトルシーンの終了条件
-	if (Input ::GetInstance()->PushKey(DIK_SPACE)) {
-		finished_ = true;
-	}
+	
 
 }
 // 描画

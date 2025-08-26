@@ -78,13 +78,14 @@ void Fade::Update() {
 		// フェード状態による分岐
 	    switch (status_) {
 	    case Status::FadeIn:
-case Status::FadeOut :
+	    case Status::FadeOut:
 		    if (counter_ >= duration_) {
 			    return true;
 		    } else {
 
 			    return false;
 		    }
+	    }
 		    return true;
 	}
 
