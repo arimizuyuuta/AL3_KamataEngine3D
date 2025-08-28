@@ -86,6 +86,7 @@ void TitleScene::Update() {
 // 描画
 void TitleScene::Draw() 
 {
+
 	// DirectXCommonインスタンスの取得
 	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
 

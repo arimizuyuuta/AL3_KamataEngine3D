@@ -46,7 +46,9 @@ private:
 
 	DeathParticles* deathParticles_ = nullptr;
 
-	
+	KamataEngine::Model* modelGoal_ = nullptr;
+	KamataEngine::WorldTransform worldTransformGoal_;
+
 
 	
 

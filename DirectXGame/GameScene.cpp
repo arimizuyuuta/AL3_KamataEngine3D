@@ -16,6 +16,10 @@ void GameScene::Initialize() {
 	camera_.farZ = 1000.0f;
 	camera_.UpdateMatrix();
 
+	// ゴールモデルを読み込み・初期化
+	modelGoal_ = Model::CreateFromOBJ("goal");
+	worldTransformGoal_.Initialize();
+	worldTransformGoal_.translation_ = mapChipField_->GetMapChipPositionByIndex(95, 18); // ステージ右端付近に設置
 	// フェードインから開始
 	phase_ = Phase::kFadeIn;
 	// フェード
@@ -23,9 +27,9 @@ void GameScene::Initialize() {
 	fade_->Initialize();
 	fade_->Start(Fade::Status:: FadeIn, 1.0f);
 
-	player_ = new Player();
-	Vector3 playerPosition = mapChipField_->GetMapChipPositionByIndex(5, 18);
-	player_-> Initialize(modelPlayer_, &camera_, playerPosition);
+	
+
+	
 
 	debugCamera_ = new DebugCamera(1280, 720);
 
@@ -34,6 +38,10 @@ void GameScene::Initialize() {
 
 	mapChipField_ = new MapChipField();
 	mapChipField_->LoadMapChipCsv("Resources/blocks.csv");
+
+	player_ = new Player();
+	Vector3 playerPosition = mapChipField_->GetMapChipPositionByIndex(5, 18);
+	player_->Initialize(modelPlayer_, &camera_, playerPosition);
 
 	GenerateBlocks(); // ← ブロック生成をここで呼び出す
 
@@ -88,6 +96,15 @@ void GameScene::GenerateBlocks() {
 //更新
 void GameScene::Update() {
 	
+	Vector3 playerPos = player_->GetWorldPosition();
+	Vector3 goalPos = worldTransformGoal_.translation_;
+
+	if (std::abs(playerPos.x - goalPos.x) < 1.0f && phase_ == Phase::kPlay) {
+		phase_ = Phase::kFadeOut;
+		fade_->Start(Fade::Status::FadeOut, 1.0f);
+	}
+
+
 
 	// フェーズ変更
 	ChangePhase();
@@ -169,6 +186,9 @@ void GameScene::Update() {
 void GameScene::Draw() {
 	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
 	Model::PreDraw(dxCommon->GetCommandList());
+
+	modelGoal_->Draw(worldTransformGoal_, camera_);
+
 
 	skydome_->Draw();
 
