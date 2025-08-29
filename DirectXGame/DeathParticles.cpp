@@ -10,7 +10,7 @@ using namespace MathUtility;
 
 void DeathParticles::Initialize(KamataEngine::Model* model, KamataEngine::Camera* camera, const KamataEngine::Vector3& position) {
 	// NULLポインタチェック
-	assert(model);
+	//assert(model);
 	// 引数として受け取ったデータをメンバ変数に記録する
 	model_ = model;
 	

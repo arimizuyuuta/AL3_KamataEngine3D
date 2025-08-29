@@ -14,7 +14,7 @@ void Enemy::Initialize(Model* model, Camera* camera, const Vector3& position)
 
 	{
 		// NULLポインタチェック
-		assert(model);
+		//assert(model);
 		// 引数として受け取ったデータをメンバ変数に記録する
 		model_ = model;
 		worldTransform_.translation_ = position;
